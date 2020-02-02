@@ -924,6 +924,9 @@ gri() {
   $str;
 }
 
+beirefresh() {
+	$(beiartf-refresh)
+}	
 
 
 trap 'echo -e "${clPURPLE}-- Started at $(date +"%H:%M:%S") --${cLIGHTGRAY}"' DEBUG
