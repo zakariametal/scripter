@@ -905,6 +905,11 @@ gfor() {
     git fetch --no-tags origin $currBranch; git rebase;
 }
 
+gfr() {
+    currBranch=$(git branch | grep \* | cut -d ' ' -f2)
+    git fetch --no-tags ${1} $currBranch; git rebase;
+}
+
 arclog() {
     arc patch ${1} ; git log;
 }
@@ -924,9 +929,37 @@ gri() {
   $str;
 }
 
+grc() {
+  str=$(echo ${1} | sed "s/\//:/g" | xargs -I{} echo "./gradlew {}:compileJava")
+  echo "running $str";
+  $str;
+}
+
+
+grtc() {
+  str=$(echo ${1} | sed "s/\//:/g" | xargs -I{} echo "./gradlew {}:compileTestJava")
+  echo "running $str";
+  $str;
+}
+
+grst() {
+  str=$(echo ${1} | sed "s/\//:/g" | xargs -I{} echo "./gradlew {}:smallTest")
+  echo "running $str";
+  $str;
+}
+
 beirefresh() {
 	$(beiartf-refresh)
 }	
+
+flightbuild(){
+	./tvbuild idea flight/*/
+}
+
+doecho() {
+	echo ${1}
+	echo ${2}
+}
 
 
 trap 'echo -e "${clPURPLE}-- Started at $(date +"%H:%M:%S") --${cLIGHTGRAY}"' DEBUG
